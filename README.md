@@ -10,7 +10,7 @@ Follow-up will continue to improve according to the company's project needs
 
 ### Directory
 
-![react-scraffold](/Users/septem/Documents/react-scraffold.png)
+![react-scraffold](https://github.com/siren-care/react-scraffold/blob/master/src/assets/image/react-scraffold.png)
 
 1. （src）Project logic code 
    1. (api) Interface of requestion
