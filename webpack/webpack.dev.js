@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.common');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 const devConfig = {
 	mode: 'development',
@@ -19,11 +20,32 @@ const devConfig = {
 			},
 		}),
 		new webpack.HotModuleReplacementPlugin(),
+		new FriendlyErrorsPlugin({
+			compilationSuccessInfo: {
+				messages: [
+					'You application is running here http://localhost:8001',
+				],
+				notes: [
+					'Some additionnal notes to be displayed unpon successful compilation',
+				],
+			},
+			onErrors: function(severity, errors) {
+				// You can listen to errors transformed and prioritized by the plugin
+				// severity can be 'error' or 'warning'
+			},
+			// should the console be cleared between each compilation?
+			// default is true
+			clearConsole: true,
+
+			// add formatters and transformers (see below)
+			additionalFormatters: [],
+			additionalTransformers: [],
+		}),
 	],
 	devServer: {
 		host: 'localhost',
 		compress: true,
-		port: 8000,
+		port: 8001,
 		historyApiFallback: true,
 		overlay: {
 			//当出现编译器错误或警告时，就在网页上显示一层黑色的背景层和错误信息
