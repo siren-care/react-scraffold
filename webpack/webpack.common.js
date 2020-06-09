@@ -52,6 +52,23 @@ module.exports = {
 			},
 
 			{
+				// for ant design
+				test: /\.less$/,
+				include: path.join(__dirname, '../node_modules'),
+				use: [
+					'style-loader',
+					'css-loader',
+					'postcss-loader',
+					{
+						loader: 'less-loader',
+						options: {
+							javascriptEnabled: true,
+						},
+					},
+				],
+			},
+
+			{
 				test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
 				use: [
 					{
@@ -92,7 +109,8 @@ module.exports = {
 	},
 
 	resolve: {
-		extensions: ['.tsx', '.ts', '.js', '.css', '.scss'],
+		mainFields: ['browser', 'main', 'module'],
+		extensions: ['.tsx', '.ts', '.js', '.jsx', '.json', '.css', '.scss'],
 		alias: {
 			src: require('path').resolve(__dirname, '../src'),
 		},
