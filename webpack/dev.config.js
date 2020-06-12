@@ -1,10 +1,11 @@
-const merge = require("webpack-merge");
-const baseConfig = require("./config");
-const webpack = require("webpack");
+const merge = require('webpack-merge');
+const baseConfig = require('./config');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const devConfig = {
-	mode: "development",
-	devtool: "cheap-module-eval-source-map",
+	mode: 'development',
+	devtool: 'cheap-module-eval-source-map',
 	watch: true,
 	watchOptions: {
 		aggregateTimeout: 200,
@@ -12,11 +13,18 @@ const devConfig = {
 		ignored: /node_modules/,
 	},
 
-	plugins: [new webpack.HotModuleReplacementPlugin()],
+	plugins: [
+		new HtmlWebpackPlugin({
+			filename: 'index.html',
+			template: './src/index.html',
+			inject: true,
+		}),
+		new webpack.HotModuleReplacementPlugin(),
+	],
 
 	devServer: {
-		host: "localhost",
-		contentBase: "../dist",
+		host: 'localhost',
+		contentBase: '../dist',
 		compress: true,
 		port: 8000,
 		historyApiFallback: true,

@@ -1,5 +1,5 @@
-import { AmplifySignOut, withAuthenticator } from "@aws-amplify/ui-react";
-import React from "react";
+import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
+import React from 'react';
 
 const App = () => {
 	return (
