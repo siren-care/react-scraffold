@@ -6,7 +6,7 @@
 
 Open your terminal and type siren or siren -h , you'll see the help infomation below:
 
-`Usage: xr <command>`
+`Usage: siren <command>`
 
 `Commands:`
 
