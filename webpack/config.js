@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 const resolve = (dir) => path.join(__dirname, '..', dir);
+const env = process.env.NODE_ENV;
 
 module.exports = {
 	entry: './src/index.tsx',
@@ -63,14 +64,18 @@ module.exports = {
 				use: [
 					// { loader: MiniCssExtractPlugin.loader },
 					'style-loader',
+					'style-loader',
 					{
 						loader: 'css-loader',
-						// options: {
-						// 	modules: true,
-						// 	importLoaders: 1,
-						// 	localIdentName: "[name]__[local]___[hash:base64:5]",
-						// 	minimize: true,
-						// },
+						options: {
+							importLoaders: 1,
+						},
+					},
+					{
+						loader: 'postcss-loader',
+						options: {
+							sourceMap: env === 'development' ? 'inline' : false,
+						},
 					},
 				],
 				exclude: /node_modules/,
