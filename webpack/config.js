@@ -1,6 +1,8 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const chalk = require('chalk');
 
 const resolve = (dir) => path.join(__dirname, '..', dir);
 const env = process.env.NODE_ENV;
@@ -42,8 +44,15 @@ module.exports = {
 		rules: [
 			// All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
 			{
-				test: /\.tsx?$/,
-				loader: 'awesome-typescript-loader',
+				test: /\.(ts|tsx)?$/,
+				use: [
+					{
+						loader: 'cache-loader',
+					},
+					'awesome-typescript-loader',
+					// "babel-loader",
+				],
+				include: path.resolve('src'),
 				exclude: /node_modules/,
 			},
 
@@ -68,6 +77,7 @@ module.exports = {
 					{
 						loader: 'css-loader',
 						options: {
+							modules: true,
 							importLoaders: 1,
 						},
 					},
@@ -115,6 +125,13 @@ module.exports = {
 		new ScriptExtHtmlWebpackPlugin({
 			//`runtime` must same as runtimeChunk name. default is `runtime`
 			inline: /runtime\..*\.js$/,
+		}),
+		new ProgressBarPlugin({
+			format: chalk.greenBright(
+				'  build [:bar] :percent (:elapsed seconds)',
+			),
+			clear: false,
+			width: 60,
 		}),
 	],
 
