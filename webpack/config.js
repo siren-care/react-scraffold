@@ -49,8 +49,8 @@ module.exports = {
 					{
 						loader: 'cache-loader',
 					},
+					'babel-loader',
 					'awesome-typescript-loader',
-					// "babel-loader",
 				],
 				include: path.resolve('src'),
 				exclude: /node_modules/,
